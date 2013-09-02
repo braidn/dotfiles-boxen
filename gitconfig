@@ -54,11 +54,16 @@ token = bb01b9fc8fc6a0c32da3eee96da8031f
 
 [core]
 excludesfile = /Users/cannonball/.gitignore_global
+excludesfile = /opt/boxen/config/git/gitignore
 whitespace=fix,tab-in-indent,trailing-space,cr-at-eol
 autocrlf = input
 safecrlf = warn
 
+[hub]
+protocol = https
+
 [credential]
+helper = /opt/boxen/bin/boxen-git-credential
 helper = osxkeychain
 
 [diff]
