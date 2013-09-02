@@ -1,0 +1,11 @@
+# ~/.tmuxinator/scratch.yml
+# you can make as many tabs as you wish...
+
+name: qly
+root: ~/src/quarterly/
+windows:
+  - editor: vim .
+  - console: 
+  - server: script/server
+  - dlogs: tail -f log/development.log
+  - zeus: zeus start
