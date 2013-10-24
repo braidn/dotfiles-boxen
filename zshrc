@@ -32,7 +32,8 @@ ZSH_THEME="miloshadzic"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew cloudapp gem github heroku osx zsh-vim-mode pow rbenv zsh-syntax-highlighting zsh-history-substring-search)
+plugins=(git brew cloudapp gem github heroku osx zsh-vim-mode pow rbenv zsh-syntax-highlighting zsh-history-substring-search vim-dwim)
+
 
 source $ZSH/oh-my-zsh.sh
 
@@ -52,6 +53,7 @@ export SSL_CERT_FILE=/opt/boxen/homebrew/opt/curl-ca-bundle/share/ca-bundle.crt
 
 . /opt/boxen/nvm/nvm.sh
 . /opt/boxen/homebrew/etc/profile.d/z.sh
+export PATH="/usr/local/bin/gifify:$PATH"
 
 #Bundler
 alias bis="bundle install --binstubs"
@@ -64,8 +66,9 @@ alias ll="ls -lahG"
 alias lp="ls -p"
 alias lm="ls -la | more"
 alias dt="ditto"
-alias ctr="ctags -R"
-alias agrr="ag --ignore-dir log --ignore tags"
+alias ctr="ctags -R -f ./.git/tags ."
+alias agrr="ag --ignore-dir log --ignore-dir tmp --ignore tags"
+alias jg="jobs"
 #Databases
 alias psql-server-start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
 alias psql-server-stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
@@ -82,4 +85,5 @@ alias gfm="git log --diff-filter=M --summary"
 alias gfr="git log --diff-filter=R --summary"
 #Gems
 alias zs="zeus"
+alias zsr="zeus rake"
 [ -f /opt/boxen/env.sh  ] && source /opt/boxen/env.sh

@@ -6,6 +6,6 @@ root: ~/src/quarterly/
 windows:
   - editor: vim .
   - console: 
-  - server: script/server
+  - server: foreman start -f Procfile.dev
   - dlogs: tail -f log/development.log
   - zeus: zeus start

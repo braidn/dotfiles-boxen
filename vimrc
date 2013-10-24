@@ -1,5 +1,6 @@
 "Setup for Vundle
 ""
+set shell=/bin/bash
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle
@@ -50,11 +51,9 @@ Bundle 'itspriddle/vim-marked'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'ervandew/supertab'
-Bundle 'MarcWeber/ultisnips'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'digitaltoad/vim-jade.git'
 Bundle 'slim-template/vim-slim'
-Bundle 'honza/vim-snippets'
 Bundle 'tpope/vim-fugitive'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'bling/vim-airline'
@@ -63,6 +62,9 @@ Bundle 'szw/vim-tags'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'tpope/vim-bundler'
 Bundle 'Floobits/floobits-vim'
+Bundle 'rking/ag.vim'
+Bundle 'SirVer/ultisnips'
+Bundle 'vim-scripts/ZoomWin'
 
 
 
@@ -106,6 +108,7 @@ set noswapfile
 set wildmenu
 set wildmode=longest:full,full
 set synmaxcol=200
+set nrformats=
 set splitbelow
 set splitright
 set nowrap
@@ -116,7 +119,7 @@ noremap <leader>y "*y
 noremap <leader>yy "*Y
 
 "Preserve indentations from pasteboard
-noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+noremap <leader>P :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 " Leader Mapping
 let mapleader = ","
@@ -124,6 +127,7 @@ let g:yankring_history_dir = '~/.vim/tmp'
 let g:gitgutter_enabled = 0
 nmap <silent> <leader>\ :nohlsearch<CR>
 nmap <leader>yr :YRShow<cr>
+nmap <leader>? :Ag 
 nnoremap <leader>u :GundoToggle<cr>
 nnoremap <silent> <leader>tt :TagbarToggle<CR>
 nnoremap <Leader>rm :Rmodel
@@ -162,6 +166,11 @@ hi Conceal ctermfg=red ctermbg=NONE
  map <Leader>rx :CloseVimTmuxPanes<CR>
 " " Interrupt any command running in the runner pane
  map <Leader>rs :VimuxClearRunnerHistory<CR>
+" Zeus love
+ map <Leader>zr :ZeusRspec<CR>
+ map <Leader>zc :ZeusCucumber<CR>
+ map <Leader>zd :ZeusDestroy<CR>
+ map <Leader>zs :ZeusStart<CR>
 
 " Turbux Window
 map <leader>tb :let g:VimuxUseNearestPane =
@@ -196,13 +205,6 @@ let g:UltiSnips = {}
 let g:UltiSnips.ListSnippets = "<c-a>"
 let g:UltiSnips.ExpandTrigger="<tab>"
 let g:UltiSnips.JumpForwardTrigger="<tab>"
-let g:UltiSnips.snipmate_ft_filter = {
-			\ 'default' : {'filetypes': ["FILETYPE", "_"] },
-			\ 'html'    : {'filetypes': ["html", "javascript", "_"] },
-			\ 'php'    : {'filetypes': ["html", "php", "_"] },
-			\ 'cpp'    : {'filetypes': [] },
-			\ }
-
 
  "Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -212,7 +214,6 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
-
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
@@ -220,6 +221,7 @@ endif
 ""Key remaps
 let g:ctrlp_map = '<Leader>p'
 nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>. :CtrlPTag<CR>
 nnoremap ; :
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -231,6 +233,18 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap jj <ESC>
 nnoremap <leader><space> :noh<cr>
+
+"Ruby Refactoring
+
+nnoremap <leader>rap  :RAddParameter<cr>
+nnoremap <leader>rcpc :RConvertPostConditional<cr>
+nnoremap <leader>rel  :RExtractLet<cr>
+vnoremap <leader>rec  :RExtractConstant<cr>
+vnoremap <leader>relv :RExtractLocalVariable<cr>
+nnoremap <leader>rit  :RInlineTemp<cr>
+vnoremap <leader>rrlv :RRenameLocalVariable<cr>
+vnoremap <leader>rriv :RRenameInstanceVariable<cr>
+vnoremap <leader>rem  :RExtractMethod<cr>
 
 " 0
 " Font and size

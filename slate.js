@@ -93,10 +93,15 @@ var focus_apps = {
 		}
 		return "Google Chrome";
 	},
-	3: 'Rdio',
+	3: 'Dash',
 	4: 'OmniFocus',
 	5: '1Password',
-	6: 'Dash',
+	6: function() {
+		if (appIsOpen("Rdio")) {
+			return "Rdio";
+		}
+		return "Sonos";
+	},
 	7: 'Tweetbot',
 	8: 'Messages',
 	9: 'Textual'
