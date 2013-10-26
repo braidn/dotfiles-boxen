@@ -41,11 +41,7 @@ cp = cherry-pick -s
 rh = reset --hard
 lg = log -p
 pl = pull
-<<<<<<< HEAD
 ph = push
-=======
-ph = pusAPACHEAPACHEh
->>>>>>> 891dceb7aceac602c28c95263bef074608d5f735
 lol = log --graph --decorate --pretty=oneline --abbrev-commit
 lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 ls = ls-files
