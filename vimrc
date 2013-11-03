@@ -65,6 +65,7 @@ Bundle 'Floobits/floobits-vim'
 Bundle 'rking/ag.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'vim-scripts/ZoomWin'
+Bundle 'suan/vim-instant-markdown'
 
 
 
@@ -92,6 +93,7 @@ set autochdir
 set showcmd
 set hidden
 set visualbell
+set number
 set cursorline
 set ttyfast
 set shiftwidth=2
