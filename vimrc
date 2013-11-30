@@ -1,6 +1,8 @@
 "Setup for Vundle
 ""
 set shell=/bin/bash
+scriptencoding utf-8
+set encoding=utf-8
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle
@@ -56,34 +58,161 @@ Bundle 'digitaltoad/vim-jade.git'
 Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'bling/vim-airline'
 Bundle 'wavded/vim-stylus'
 Bundle 'szw/vim-tags'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'tpope/vim-bundler'
-Bundle 'Floobits/floobits-vim'
-Bundle 'rking/ag.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'suan/vim-instant-markdown'
+Bundle 'itchyny/lightline.vim'
+
 
 
 
 filetype plugin indent on
 
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste'  ], [ 'fugitive', 'filename'  ], ['ctrlpmark']  ],
+      \   'right': [ [ 'syntastic', 'lineinfo'  ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype'  ]  ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'MyFugitive',
+      \   'filename': 'MyFilename',
+      \   'fileformat': 'MyFileformat',
+      \   'filetype': 'MyFiletype',
+      \   'fileencoding': 'MyFileencoding',
+      \   'mode': 'MyMode',
+      \   'ctrlpmark': 'CtrlPMark',
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
+      \ },
+      \ 'subseparator': { 'left': '|', 'right': '|'  }
+      \ }
+
+
+function! MyModified()
+  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! MyFilename()
+  let fname = expand('%:t')
+  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'unite' ? unite#get_status_string() :
+        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ''  " edit here for cool mark
+      let _ = fugitive#head()
+      return strlen(_) ? mark._ : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') =~ 'ControlP'
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlPStatusFunc_1',
+  \ 'prog': 'CtrlPStatusFunc_2',
+  \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+  let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
+
 
 "Color stuff
 syntax enable
-scriptencoding utf-8
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 set background=dark
-color solarized
+colorscheme solarized
 call togglebg#map("<F1>")
 set clipboard=unnamed
 
 " Random personal settings
 set smartindent
-set encoding=utf-8
 set linespace=0                 " No extra spaces between rows
 set backspace=indent,eol,start
 set laststatus=2
@@ -129,7 +258,7 @@ let g:yankring_history_dir = '~/.vim/tmp'
 let g:gitgutter_enabled = 0
 nmap <silent> <leader>\ :nohlsearch<CR>
 nmap <leader>yr :YRShow<cr>
-nmap <leader>? :Ag 
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>u :GundoToggle<cr>
 nnoremap <silent> <leader>tt :TagbarToggle<CR>
 nnoremap <Leader>rm :Rmodel
@@ -224,7 +353,6 @@ endif
 let g:ctrlp_map = '<Leader>p'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>. :CtrlPTag<CR>
-nnoremap ; :
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -248,15 +376,16 @@ vnoremap <leader>rrlv :RRenameLocalVariable<cr>
 vnoremap <leader>rriv :RRenameInstanceVariable<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
 
-" 0
-" Font and size
-set guifont=Menlo-Powerline:h12
-"let g:Powerline_symbols = 'fancy'
-let g:airline_powerline_fonts = 1
-
 " When dealing with special file types
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 autocmd Filetype gitcommit setlocal spell textwidth=72
 let g:slime_target = "tmux"
 
-
+" A Better Grep
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
