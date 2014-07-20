@@ -32,7 +32,7 @@ ZSH_THEME="miloshadzic"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew gem heroku osx zsh-vim-mode pow rbenv zsh-syntax-highlighting zsh-history-substring-search vim-dwim)
+plugins=(zeus git brew gem osx zsh-vim-mode pow rbenv zsh-syntax-highlighting zsh-history-substring-search vim-dwim)
 
 
 source $ZSH/oh-my-zsh.sh
@@ -57,8 +57,11 @@ export PATH="/usr/local/bin/gifify:$PATH"
 #Bundler
 alias bis="bundle install --binstubs"
 alias bi="bundle install"
+alias bip="bundle install --path=.bundle"
 alias be="bundle exec"
 #System
+alias o.="open ."
+alias a.="add ."
 alias cl="clear"
 alias cwd='pwd | pbcopy'
 alias ll="ls -lahG"
@@ -85,4 +88,33 @@ alias gfr="git log --diff-filter=R --summary"
 #Gems
 alias zs="zeus"
 alias zsr="zeus rake"
+alias slogit="~/.slogger/slogger"
 [ -f /opt/boxen/env.sh  ] && source /opt/boxen/env.sh
+#Chruby
+source /opt/boxen/chruby/share/chruby/chruby.sh
+source /opt/boxen/chruby/share/chruby/auto.sh
+RUBIES=(/opt/rubies/*)
+export RUBIES
+
+#Functions
+
+# Helper for shell prompts and the like
+current-ruby() {
+  if [ -z "$RUBY_ROOT" ]; then
+    echo "system"
+  else
+    echo "${RUBY_ROOT##*/}"
+  fi
+}
+
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    fg
+    zle redisplay
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z

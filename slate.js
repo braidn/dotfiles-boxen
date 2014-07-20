@@ -29,7 +29,7 @@ S.cfga({
 
 var sCinema = "2560x1440";
 var sLaptop = "1440x900";
-var sDell     = "1680x1050";
+var sAsus     = "1920x1200";
 var fullscreen = S.op("move", {
   "x" : "screenOriginX",
   "y" : "screenOriginY",
@@ -71,6 +71,10 @@ S.bnda({
   "w:ctrl;alt" : screenResizeTopHalf,
   "s:ctrl;alt" : screenResizeBottomHalf,
 
+  // Throws
+  "1:alt;shift" : S.op("throw", { "screen" : '0' }),
+  "2:alt;shift" : S.op("throw", { "screen" : '1' }),
+
   // Postions
   "q:ctrl;alt": fullscreen,
   "esc:cmd": S.op("hint"),
@@ -93,8 +97,8 @@ var focus_apps = {
     }
     return "Google Chrome";
   },
-  3: 'Dash',
-  4: 'OmniFocus',
+  3: 'OmniFocus',
+  4: 'Dash',
   5: '1Password',
   6: function() {
     if (appIsOpen("Sonos")) {

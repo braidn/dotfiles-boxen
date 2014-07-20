@@ -5,8 +5,8 @@ name: qly
 root: ~/src/quarterly/
 windows:
   - editor: vim .
-  - console: 
-  - server: foreman start
+  - git: gitsh
+  - console: #zeus
+  - server: #zeus
   - dlogs: tail -f log/development.log
   - zeus: zeus start
-  - l-pad:

@@ -11,61 +11,71 @@ call vundle#rc()
 ""Hey Vundle
 Bundle 'gmarik/vundle'
 
-""MINE!
-Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
+""Plugins
 Bundle 'kien/ctrlp.vim'
 Bundle 'mattn/gist-vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'vim-scripts/Puppet-Syntax-Highlighting'
 Bundle 'scrooloose/syntastic'
 Bundle 'godlygeek/tabular'
-Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'tpope/vim-cucumber'
+Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Yggdroot/indentLine'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-endwise'
+Bundle 'tomtom/tlib_vim'
+Bundle 'jiangmiao/auto-pairs'
+Bundle 'sjl/gundo.vim'
+Bundle 'AndrewRadev/switch.vim'
+Bundle 'tpope/vim-repeat'
+Bundle 'benmills/vimux'
+Bundle 'skalnik/vim-vroom'
+Bundle 'sjl/vitality.vim'
+Bundle 'vim-scripts/YankRing.vim'
+Bundle 'mattn/emmet-vim'
+Bundle 'mattn/webapi-vim'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'ervandew/supertab'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'tpope/vim-fugitive'
+Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'szw/vim-tags'
+Bundle 'myusuf3/numbers.vim'
+Bundle 'tpope/vim-bundler'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
+Bundle 'vim-scripts/ZoomWin'
+Bundle 'itchyny/lightline.vim'
+Bundle 'thoughtbot/vim-rspec'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
+Bundle 'edkolev/tmuxline.vim'
+Bundle 'gcmt/wildfire.vim'
+Bundle 'tpope/vim-dispatch'
+""Will you make the cut
+Bundle 'AndrewRadev/splitjoin.vim'
+Bundle 'tpope/vim-vinegar'
+Bundle 'tpope/vim-commentary'
+Bundle 'editorconfig/editorconfig-vim'
+Bundle 'mrtazz/simplenote.vim'
+Bundle 'malkomalko/projections.vim'
+
+""Syntax
+Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
+Bundle 'vim-scripts/Puppet-Syntax-Highlighting'
+Bundle 'tpope/vim-cucumber'
 Bundle 'pangloss/vim-javascript'
 Bundle 'leshill/vim-json'
 Bundle 'briancollins/vim-jst'
 Bundle 'groenewege/vim-less'
 Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-endwise'
-Bundle 'tomtom/tlib_vim'
-Bundle 'wusher/apidock.vim'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'sjl/gundo.vim'
-Bundle 'AndrewRadev/switch.vim'
 Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-repeat'
-Bundle 'ecomba/vim-ruby-refactoring'
-Bundle 'jgdavey/vim-turbux'
-Bundle 'benmills/vimux'
-Bundle 'sjl/vitality.vim'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'mattn/emmet-vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
 Bundle 'nono/vim-handlebars'
-Bundle 'itspriddle/vim-marked'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'ervandew/supertab'
-Bundle 'vim-scripts/matchit.zip'
 Bundle 'digitaltoad/vim-jade.git'
 Bundle 'slim-template/vim-slim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'wavded/vim-stylus'
-Bundle 'szw/vim-tags'
-Bundle 'myusuf3/numbers.vim'
-Bundle 'tpope/vim-bundler'
-Bundle 'SirVer/ultisnips'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'suan/vim-instant-markdown'
-Bundle 'itchyny/lightline.vim'
+Bundle 'heartsentwined/vim-emblem'
 
 
 
@@ -218,7 +228,6 @@ set backspace=indent,eol,start
 set laststatus=2
 set t_Co=256
 set showmode
-set autochdir
 set showcmd
 set hidden
 set visualbell
@@ -244,6 +253,8 @@ set splitbelow
 set splitright
 set nowrap
 set ttimeoutlen=100
+"trim whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
 
 "Yank into OS X, might require reattach-to-user clipboard"
 noremap <leader>y "*y
@@ -253,9 +264,11 @@ noremap <leader>yy "*Y
 noremap <leader>P :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 " Leader Mapping
-let mapleader = ","
+let mapleader = "\<Space>"
 let g:yankring_history_dir = '~/.vim/tmp'
 let g:gitgutter_enabled = 0
+nmap <leader>nx :vp.<CR>
+nmap <leader>nv :ss.<CR>
 nmap <silent> <leader>\ :nohlsearch<CR>
 nmap <leader>yr :YRShow<cr>
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
@@ -282,6 +295,7 @@ nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gl :Glog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gw :Gwrite!<CR>
 
 "Indent Lines
 hi Conceal ctermfg=red ctermbg=NONE
@@ -297,27 +311,13 @@ hi Conceal ctermfg=red ctermbg=NONE
  map <Leader>rx :CloseVimTmuxPanes<CR>
 " " Interrupt any command running in the runner pane
  map <Leader>rs :VimuxClearRunnerHistory<CR>
-" Zeus love
- map <Leader>zr :ZeusRspec<CR>
- map <Leader>zc :ZeusCucumber<CR>
- map <Leader>zd :ZeusDestroy<CR>
- map <Leader>zs :ZeusStart<CR>
 
-" Turbux Window
-map <leader>tb :let g:VimuxUseNearestPane =
-" Turbx Mapping
-let g:no_turbux_mappings = 1
- let g:turbux_runner  = 'vimux'
-map <leader>m <Plug>SendTestToTmux
-map <leader>M <Plug>SendFocusedTestToTmux
+" Vroom Settings
+let g:vroom_use_zeus = 1
+let g:vroom_use_dispatch = 1
 
 "Switch
 nnoremap - :Switch<cr>
-
-" Nerd Tree jazz
-let NERDTreeShowLineNumbers=1
-let NERDTreeWinPos='right'
-nmap <Leader>n :NERDTreeToggle<CR>
 
 " Tabularize
 nmap <Leader>a= :Tabularize /=<CR>
@@ -332,10 +332,11 @@ vmap <Leader>a, :Tabularize /,<CR>
 " OmniComplete Supertab and UltraSnips
 set omnifunc=syntaxcomplete#Complete
 " Ultisnips directory for extra snipps
-let g:UltiSnips = {}
-let g:UltiSnips.ListSnippets = "<c-a>"
-let g:UltiSnips.ExpandTrigger="<tab>"
-let g:UltiSnips.JumpForwardTrigger="<tab>"
+let g:UltiSnipsSnippetsDir        = '/.vim/bundle/vim-snippets/'
+let g:UltiSnipsSnippetDirectories = ['UltiSnips']
+let g:UltiSnipsListSnippets = "<c-a>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 
  "Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -349,10 +350,21 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-""Key remaps
+"Ctrl-p Bindings
 let g:ctrlp_map = '<Leader>p'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>. :CtrlPTag<CR>
+
+"TmuxLine settings
+let g:tmuxline_preset = {
+      \'a' : '#S',
+      \'b' : '#(whoami)',
+      \'c' : '#(~/src/battery Discharging)',
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'z' : '#(tmux-mem-cpu-load 2)',}
+
+""Key remaps
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -362,19 +374,10 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap jj <ESC>
-nnoremap <leader><space> :noh<cr>
 
-"Ruby Refactoring
-
-nnoremap <leader>rap  :RAddParameter<cr>
-nnoremap <leader>rcpc :RConvertPostConditional<cr>
-nnoremap <leader>rel  :RExtractLet<cr>
-vnoremap <leader>rec  :RExtractConstant<cr>
-vnoremap <leader>relv :RExtractLocalVariable<cr>
-nnoremap <leader>rit  :RInlineTemp<cr>
-vnoremap <leader>rrlv :RRenameLocalVariable<cr>
-vnoremap <leader>rriv :RRenameInstanceVariable<cr>
-vnoremap <leader>rem  :RExtractMethod<cr>
+nnoremap <Leader>zt :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>zl :call RunLastSpec()<CR>
+let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 
 " When dealing with special file types
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
