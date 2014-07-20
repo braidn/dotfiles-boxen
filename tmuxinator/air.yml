@@ -1,0 +1,10 @@
+# ~/.tmuxinator/scratch.yml
+# you can make as many tabs as you wish...
+
+name: air
+root: ~/src/airware/
+windows:
+  - editor: vim .
+  - git: gitsh
+  - console: rails c
+  - server: foreman start -f Procfile.dev

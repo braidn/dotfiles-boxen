@@ -1,0 +1,8 @@
+project_name: rfrm
+project_root: ~/src/reformation
+windows:
+  - vim: vim .
+  - server: #zeus s
+  - logs: xtail log/
+  - guard: be guard start
+  - zeus: zeus start

@@ -1,0 +1,7 @@
+project_name: EMG-R
+project_root: ~/Dropbox/src/emg-Ruby/
+windows:
+  - vim:
+  - server:
+  - tlogs: multitail -i log/test.log
+  - git: gitsh

@@ -1,0 +1,7 @@
+project_name: h&c
+project_root: ~/src/hughandcrye
+windows:
+  - editor:
+  - git: gitsh
+  - console:
+  - server:
