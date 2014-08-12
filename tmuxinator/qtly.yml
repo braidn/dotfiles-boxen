@@ -1,7 +1,7 @@
 # ~/.tmuxinator/scratch.yml
 # you can make as many tabs as you wish...
 
-name: qly
+name: qtly
 root: ~/src/quarterly/
 windows:
   - editor: vim .

@@ -6,5 +6,5 @@ root: ~/src/airware/
 windows:
   - editor: vim .
   - git: gitsh
-  - console: rails c
   - server: foreman start -f Procfile.dev
+  - logs: xtail log/

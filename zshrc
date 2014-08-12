@@ -40,6 +40,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 #eval "$(rbenv init -)"
 export EDITOR='vim -f'
+export GOPATH=$HOME/src/play/go
 export CC="/usr/bin/gcc-4.2"
 # for binstubs/bundler/rbenv
 #export PATH="./bin:$PATH"

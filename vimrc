@@ -52,6 +52,7 @@ Bundle 'rizzatti/dash.vim'
 Bundle 'edkolev/tmuxline.vim'
 Bundle 'gcmt/wildfire.vim'
 Bundle 'tpope/vim-dispatch'
+Bundle 'fatih/vim-go'
 ""Will you make the cut
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'tpope/vim-vinegar'
@@ -305,15 +306,12 @@ hi Conceal ctermfg=red ctermbg=NONE
  map <Leader>rt :VimuxPromptCommand<CR>
 " " Run last command executed by RunVimTmuxCommand
  map <Leader>rl :VimuxRunLastCommand<CR>
-" " Inspect runner pane
- map <Leader>ro :VimuxOpenPane<CR>
 " " Close all other tmux panes in current window
- map <Leader>rx :CloseVimTmuxPanes<CR>
+ map <Leader>rx :VimuxCloseRunner<CR>
 " " Interrupt any command running in the runner pane
- map <Leader>rs :VimuxClearRunnerHistory<CR>
+ map <Leader>rh :VimuxClearRunnerHistory<CR>
 
 " Vroom Settings
-let g:vroom_use_zeus = 1
 let g:vroom_use_dispatch = 1
 
 "Switch

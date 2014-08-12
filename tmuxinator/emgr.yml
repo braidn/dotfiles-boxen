@@ -1,7 +1,7 @@
-project_name: EMG-R
-project_root: ~/Dropbox/src/emg-Ruby/
+project_name: emgr
+project_root: ~/src/emailg
 windows:
   - vim:
   - server:
-  - tlogs: multitail -i log/test.log
+  - logs: xtail log/
   - git: gitsh
