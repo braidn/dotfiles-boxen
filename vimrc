@@ -1,92 +1,90 @@
 "Setup for Vundle
 ""
-set shell=/bin/bash
-scriptencoding utf-8
-set encoding=utf-8
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
+set encoding=utf-8
+scriptencoding utf-8
+set shell=/bin/bash
 ""Hey Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 ""Plugins
-Bundle 'kien/ctrlp.vim'
-Bundle 'mattn/gist-vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'godlygeek/tabular'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Yggdroot/indentLine'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-endwise'
-Bundle 'tomtom/tlib_vim'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'sjl/gundo.vim'
-Bundle 'AndrewRadev/switch.vim'
-Bundle 'tpope/vim-repeat'
-Bundle 'benmills/vimux'
-Bundle 'skalnik/vim-vroom'
-Bundle 'sjl/vitality.vim'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'mattn/emmet-vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'ervandew/supertab'
-Bundle 'vim-scripts/matchit.zip'
-Bundle 'tpope/vim-fugitive'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'szw/vim-tags'
-Bundle 'myusuf3/numbers.vim'
-Bundle 'tpope/vim-bundler'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'itchyny/lightline.vim'
-Bundle 'thoughtbot/vim-rspec'
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
-Bundle 'edkolev/tmuxline.vim'
-Bundle 'gcmt/wildfire.vim'
-Bundle 'tpope/vim-dispatch'
-Bundle 'fatih/vim-go'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'mattn/gist-vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'godlygeek/tabular'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Yggdroot/indentLine'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-endwise'
+Plugin 'tomtom/tlib_vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'sjl/gundo.vim'
+Plugin 'AndrewRadev/switch.vim'
+Plugin 'tpope/vim-repeat'
+Plugin 'benmills/vimux'
+Plugin 'skalnik/vim-vroom'
+Plugin 'sjl/vitality.vim'
+Plugin 'vim-scripts/YankRing.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'mattn/webapi-vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'ervandew/supertab'
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'tpope/vim-fugitive'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'szw/vim-tags'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'tpope/vim-bundler'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'itchyny/lightline.vim'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'rizzatti/funcoo.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'gcmt/wildfire.vim'
+Plugin 'tpope/vim-dispatch'
+Plugin 'fatih/vim-go'
 ""Will you make the cut
-Bundle 'AndrewRadev/splitjoin.vim'
-Bundle 'tpope/vim-vinegar'
-Bundle 'tpope/vim-commentary'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'mrtazz/simplenote.vim'
-Bundle 'malkomalko/projections.vim'
+Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-commentary'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'mrtazz/simplenote.vim'
+Plugin 'malkomalko/projections.vim'
 
 ""Syntax
-Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
-Bundle 'vim-scripts/Puppet-Syntax-Highlighting'
-Bundle 'tpope/vim-cucumber'
-Bundle 'pangloss/vim-javascript'
-Bundle 'leshill/vim-json'
-Bundle 'briancollins/vim-jst'
-Bundle 'groenewege/vim-less'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-haml'
-Bundle 'nono/vim-handlebars'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'digitaltoad/vim-jade.git'
-Bundle 'slim-template/vim-slim'
-Bundle 'wavded/vim-stylus'
-Bundle 'heartsentwined/vim-emblem'
+Plugin 'ChrisYip/Better-CSS-Syntax-for-Vim'
+Plugin 'vim-scripts/Puppet-Syntax-Highlighting'
+Plugin 'tpope/vim-cucumber'
+Plugin 'pangloss/vim-javascript'
+Plugin 'leshill/vim-json'
+Plugin 'briancollins/vim-jst'
+Plugin 'groenewege/vim-less'
+Plugin 'tpope/vim-haml'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'nono/vim-handlebars'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'digitaltoad/vim-jade.git'
+Plugin 'slim-template/vim-slim'
+Plugin 'wavded/vim-stylus'
+Plugin 'heartsentwined/vim-emblem'
 
-
-
-
+call vundle#end()            " required
 filetype plugin indent on
 
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste'  ], [ 'fugitive', 'filename'  ], ['ctrlpmark']  ],
+      \   'left': [ [ 'mode', 'paste'  ], [ 'fugitive', 'filename'  ] ],
       \   'right': [ [ 'syntastic', 'lineinfo'  ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype'  ]  ]
       \ },
       \ 'component_function': {
@@ -96,7 +94,6 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
-      \   'ctrlpmark': 'CtrlPMark',
       \ },
       \ 'component_expand': {
       \   'syntastic': 'SyntasticStatuslineFlag',
@@ -166,33 +163,6 @@ function! MyMode()
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP'
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
-
-let g:ctrlp_status_func = {
-  \ 'main': 'CtrlPStatusFunc_1',
-  \ 'prog': 'CtrlPStatusFunc_2',
-  \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
-endfunction
-
 let g:tagbar_status_func = 'TagbarStatusFunc'
 
 function! TagbarStatusFunc(current, sort, fname, ...) abort
@@ -216,10 +186,9 @@ let g:vimshell_force_overwrite_statusline = 0
 
 "Color stuff
 syntax enable
-"let g:solarized_termcolors=256
+set term=xterm-256color
 set background=dark
 colorscheme solarized
-call togglebg#map("<F1>")
 set clipboard=unnamed
 
 " Random personal settings
@@ -266,7 +235,6 @@ noremap <leader>P :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 " Leader Mapping
 let mapleader = "\<Space>"
-let g:yankring_history_dir = '~/.vim/tmp'
 let g:gitgutter_enabled = 0
 nmap <leader>nx :vp.<CR>
 nmap <leader>nv :ss.<CR>
@@ -348,11 +316,6 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-"Ctrl-p Bindings
-let g:ctrlp_map = '<Leader>p'
-nnoremap <Leader>b :CtrlPBuffer<CR>
-nnoremap <Leader>. :CtrlPTag<CR>
-
 "TmuxLine settings
 let g:tmuxline_preset = {
       \'a' : '#S',
@@ -373,6 +336,12 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap jj <ESC>
 
+nnoremap <Leader>p :Unite file_rec/async:./<cr>
+nnoremap <Leader>/ :Unite grep:.<cr>
+let g:unite_source_history_yank_enable = 1
+nnoremap <Leader>Y :Unite history/yank<cr>
+nnoremap <Leader>s :Unite -quick-match buffer<cr>
+
 nnoremap <Leader>zt :call RunCurrentSpecFile()<CR>
 nnoremap <Leader>zl :call RunLastSpec()<CR>
 let g:rspec_command = "Dispatch bundle exec rspec {spec}"
@@ -381,12 +350,33 @@ let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 autocmd Filetype gitcommit setlocal spell textwidth=72
 let g:slime_target = "tmux"
+let g:netrw_bufsettings='nu'
+let netrw_liststyle=3
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#custom#source('grep', 'ignore_globs', ['./.git/*', './.bundle/*'])
+call unite#custom#source('file_rec/async', 'ignore_globs', ['./.git/*', './.bundle/*'])
+let g:unite_source_rec_async_command =
+    \ 'ag --follow --nocolor --nogroup -g ""'
 
 " A Better Grep
 if executable('ag')
   " Use ag over grep
+   let g:unite_source_grep_command='ag'
+   let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
+   let g:unite_source_grep_recursive_opt=''
   set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 endif
+
+function! s:RevealInFinder()
+  if filereadable(expand("%"))
+    let l:command = "open -R %"
+  elseif getftype(expand("%:p:h")) == "dir"
+    let l:command = "open %:p:h"
+  else
+    let l:command = "open ."
+  endif
+  execute ":silent! !" . l:command
+ " For terminal Vim not to look messed up.
+ redraw!
+endfunction command! Reveal call <SID>RevealInFinder()

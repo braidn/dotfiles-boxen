@@ -1,7 +1,6 @@
-project_name: h&c
+project_name: hcry
 project_root: ~/src/hughandcrye
 windows:
   - editor:
-  - git: gitsh
-  - console:
   - server:
+  - logs: xtail ./log

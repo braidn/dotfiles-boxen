@@ -91,24 +91,14 @@ function appIsOpen(name) {
 
 var focus_apps = {
   1: 'iTerm',
-  2: function() {
-    if (appIsOpen("Google Chrome Canary")) {
-      return "Google Chrome Canary";
-    }
-    return "Google Chrome";
-  },
+  2: 'Google Chrome',
   3: 'OmniFocus',
   4: 'Dash',
-  5: '1Password',
-  6: function() {
-    if (appIsOpen("Sonos")) {
-      return "Sonos";
-    }
-    return "Rdio";
-  },
-  7: 'Tweetbot',
+  5: 'Rdio',
+  6: '1Password',
+  7: 'Textual',
   8: 'Messages',
-  9: 'Textual'
+  9: 'Mail'
 }
 
 _(focus_apps).forEach(function(app, key) {

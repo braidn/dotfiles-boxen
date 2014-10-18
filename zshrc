@@ -42,18 +42,13 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim -f'
 export GOPATH=$HOME/src/play/go
 export CC="/usr/bin/gcc-4.2"
-# for binstubs/bundler/rbenv
-#export PATH="./bin:$PATH"
-#export PATH="/usr/local/bin:$PATH"
-#export PATH="/usr/local/sbin:$PATH"
+export CLICOLOR=1
 PS1="$PS1"'$([ -n "$TMUX"  ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-export SSL_CERT_FILE=/opt/boxen/homebrew/opt/curl-ca-bundle/share/ca-bundle.crt
-
+export SSL_CERT_FILE=/opt/boxen/homebrew/etc/openssl/certs/ca_bundle.pem
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 . /opt/boxen/homebrew/etc/profile.d/z.sh
-export PATH="/usr/local/bin/gifify:$PATH"
 
 #Bundler
 alias bis="bundle install --binstubs"
@@ -82,6 +77,7 @@ alias tls="tmux ls"
 alias tat="tmux at -t"
 #Git
 alias gfo="git fetch origin"
+alias gbr="git br -v"
 alias gfd="git log --diff-filter=D --summary"
 alias gfa="git log --diff-filter=A --summary"
 alias gfm="git log --diff-filter=M --summary"

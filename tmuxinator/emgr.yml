@@ -4,4 +4,3 @@ windows:
   - vim:
   - server:
   - logs: xtail log/
-  - git: gitsh

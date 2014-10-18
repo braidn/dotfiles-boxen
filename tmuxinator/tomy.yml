@@ -1,0 +1,6 @@
+project_name: tomy
+project_root: ~/src/tommy-john
+windows:
+  - vim: vim .
+  - server: #zeus s
+  - logs: xtail log/
