@@ -1,10 +1,9 @@
 # ~/.tmuxinator/scratch.yml
 # you can make as many tabs as you wish...
 
-name: air
+name: airw
 root: ~/src/airware/
 windows:
   - editor: vim .
-  - git: gitsh
   - server: foreman start -f Procfile.dev
   - logs: xtail log/

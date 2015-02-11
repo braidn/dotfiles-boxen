@@ -1,9 +1,8 @@
 # ~/.tmuxinator/scratch.yml
 # you can make as many tabs as you wish...
 
-project_name: emg
-project_root: ~/src/eMailGrouper
+name: shft
+root: ~/src/shift/
 windows:
   - editor: vim .
-  - git: gitsh
-  - ultrahook: #empty
+  - grunt: cd website/ && grunt serve

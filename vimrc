@@ -1,84 +1,84 @@
-"Setup for Vundle
+"Setup for Plugin Manager
 ""
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 set encoding=utf-8
 scriptencoding utf-8
 set shell=/bin/bash
-""Hey Vundle
-Plugin 'gmarik/Vundle.vim'
 
-""Plugins
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'mattn/gist-vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'godlygeek/tabular'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Yggdroot/indentLine'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-endwise'
-Plugin 'tomtom/tlib_vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'sjl/gundo.vim'
-Plugin 'AndrewRadev/switch.vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'benmills/vimux'
-Plugin 'skalnik/vim-vroom'
-Plugin 'sjl/vitality.vim'
-Plugin 'vim-scripts/YankRing.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'mattn/webapi-vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/matchit.zip'
-Plugin 'tpope/vim-fugitive'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'szw/vim-tags'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'tpope/vim-bundler'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'vim-scripts/ZoomWin'
-Plugin 'itchyny/lightline.vim'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'rizzatti/funcoo.vim'
-Plugin 'rizzatti/dash.vim'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'gcmt/wildfire.vim'
-Plugin 'tpope/vim-dispatch'
-Plugin 'fatih/vim-go'
+""Plugs
+Plug 'altercation/vim-colors-solarized'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_mac.mak' }
+Plug 'mattn/gist-vim'
+Plug 'scrooloose/syntastic'
+Plug 'godlygeek/tabular'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'tomtom/tlib_vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'sjl/gundo.vim'
+Plug 'AndrewRadev/switch.vim'
+Plug 'tpope/vim-repeat'
+Plug 'benmills/vimux'
+Plug 'skalnik/vim-vroom'
+Plug 'sjl/vitality.vim'
+Plug 'mattn/emmet-vim'
+Plug 'mattn/webapi-vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'ervandew/supertab'
+Plug 'vim-scripts/matchit.zip'
+Plug 'tpope/vim-fugitive'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'szw/vim-tags'
+Plug 'b3niup/numbers.vim'
+Plug 'tpope/vim-bundler'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'vim-scripts/ZoomWin'
+Plug 'itchyny/lightline.vim'
+Plug 'thoughtbot/vim-rspec'
+Plug 'rizzatti/funcoo.vim'
+Plug 'rizzatti/dash.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'gcmt/wildfire.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'fatih/vim-go'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  }
+Plug 'gabebw/vim-rdio'
 ""Will you make the cut
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-commentary'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'mrtazz/simplenote.vim'
-Plugin 'malkomalko/projections.vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-commentary'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mrtazz/simplenote.vim'
+Plug 'malkomalko/projections.vim'
+Plug 'Shougo/neocomplete.vim'
 
 ""Syntax
-Plugin 'ChrisYip/Better-CSS-Syntax-for-Vim'
-Plugin 'vim-scripts/Puppet-Syntax-Highlighting'
-Plugin 'tpope/vim-cucumber'
-Plugin 'pangloss/vim-javascript'
-Plugin 'leshill/vim-json'
-Plugin 'briancollins/vim-jst'
-Plugin 'groenewege/vim-less'
-Plugin 'tpope/vim-haml'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'nono/vim-handlebars'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'digitaltoad/vim-jade.git'
-Plugin 'slim-template/vim-slim'
-Plugin 'wavded/vim-stylus'
-Plugin 'heartsentwined/vim-emblem'
+Plug 'ChrisYip/Better-CSS-Syntax-for-Vim'
+Plug 'vim-scripts/Puppet-Syntax-Highlighting'
+Plug 'tpope/vim-cucumber'
+Plug 'pangloss/vim-javascript'
+Plug 'leshill/vim-json'
+Plug 'briancollins/vim-jst'
+Plug 'groenewege/vim-less'
+Plug 'tpope/vim-haml'
+Plug 'plasticboy/vim-markdown'
+Plug 'nono/vim-handlebars'
+Plug 'kchmck/vim-coffee-script'
+Plug 'wting/rust.vim'
+Plug 'slim-template/vim-slim'
+Plug 'wavded/vim-stylus'
+Plug 'heartsentwined/vim-emblem'
 
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on
 
 let g:lightline = {
@@ -187,6 +187,7 @@ let g:vimshell_force_overwrite_statusline = 0
 "Color stuff
 syntax enable
 set term=xterm-256color
+let g:solarized_termtrans = 1
 set background=dark
 colorscheme solarized
 set clipboard=unnamed
@@ -352,19 +353,29 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 let g:slime_target = "tmux"
 let g:netrw_bufsettings='nu'
 let netrw_liststyle=3
+let g:syntastic_javascript_checkers = ['jshint']
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#custom#source('grep', 'ignore_globs', ['./.git/*', './.bundle/*'])
-call unite#custom#source('file_rec/async', 'ignore_globs', ['./.git/*', './.bundle/*'])
+call unite#custom#source('grep', 'ignore_globs', ['./.git/*', './.bundle/*', 'node_modules/**', 'app/bower_components/**', 'app/images/**', 'dist/**'])
+call unite#custom#source('file_rec/async', 'ignore_globs', ['./.git/*', './.bundle/*', 'node_modules/**', 'app/bower_components/**', 'app/images/**', 'dist/**'])
 let g:unite_source_rec_async_command =
     \ 'ag --follow --nocolor --nogroup -g ""'
+
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+nnoremap <Leader>nce :NeoCompleteEnable<cr>
+nnoremap <Leader>ncd :NeoCompleteDisable<cr>
 
 " A Better Grep
 if executable('ag')
   " Use ag over grep
    let g:unite_source_grep_command='ag'
    let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
-   let g:unite_source_grep_recursive_opt=''
+   let g:unite_source_grep_recursive_opt='--line-numbers'
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 

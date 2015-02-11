@@ -5,8 +5,5 @@ name: qtly
 root: ~/src/quarterly/
 windows:
   - editor: vim .
-  - git: gitsh
-  - console: #zeus
-  - server: #zeus
-  - dlogs: tail -f log/development.log
-  - zeus: zeus start
+  - server:
+  - dlogs: xtail log

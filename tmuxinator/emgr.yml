@@ -1,5 +1,5 @@
 project_name: emgr
-project_root: ~/src/emailg
+project_root: ~/src/eMG-rb
 windows:
   - vim:
   - server:

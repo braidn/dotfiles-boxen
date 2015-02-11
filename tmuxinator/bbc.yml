@@ -1,9 +1,0 @@
-# ~/.tmuxinator/scratch.yml
-# you can make as many tabs as you wish...
-
-project_name: bbc
-project_root: ~/src/blue-bottle-coffee/
-windows:
-  - editor: vim .
-  - console: rails c
-  - dlogs: tail -f log/development.log

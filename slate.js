@@ -96,7 +96,7 @@ var focus_apps = {
   4: 'Dash',
   5: 'Rdio',
   6: '1Password',
-  7: 'Textual',
+  7: 'Textual\ 5',
   8: 'Messages',
   9: 'Mail'
 }

@@ -38,26 +38,30 @@ plugins=(zeus git brew gem osx zsh-vim-mode pow rbenv zsh-syntax-highlighting zs
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-#eval "$(rbenv init -)"
 export EDITOR='vim -f'
 export GOPATH=$HOME/src/play/go
-export CC="/usr/bin/gcc-4.2"
+# export CC="/usr/bin/gcc-4.2"
+# perl warnings
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 export CLICOLOR=1
 PS1="$PS1"'$([ -n "$TMUX"  ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-export SSL_CERT_FILE=/opt/boxen/homebrew/etc/openssl/certs/ca_bundle.pem
+# export SSL_CERT_FILE=/opt/boxen/homebrew/etc/openssl/certs/ca_bundle.pem
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 . /opt/boxen/homebrew/etc/profile.d/z.sh
 
 #Bundler
-alias bis="bundle install --binstubs"
+alias be="bundle exec"
+alias bu="bundle update"
 alias bi="bundle install"
 alias bip="bundle install --path=.bundle"
-alias be="bundle exec"
+alias bis="bundle install --binstubs"
 #System
+alias v="vim"
 alias o.="open ."
-alias a.="add ."
 alias cl="clear"
 alias cwd='pwd | pbcopy'
 alias ll="ls -lahG"
@@ -65,7 +69,7 @@ alias lp="ls -p"
 alias lm="ls -la | more"
 alias dt="ditto"
 alias ctr="ctags -R -f ./.git/tags ."
-alias agrr="ag --ignore-dir log --ignore-dir tmp --ignore tags"
+alias agrr="ag --ignore-dir log --ignore-dir tmp --ignore tags --ignore-dir node_modules --ignore-dir _build"
 alias jg="jobs"
 #Databases
 alias psql-server-start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
@@ -75,16 +79,7 @@ alias tkil="tmux kill-session -t"
 alias tnw="tmux new-window -n"
 alias tls="tmux ls"
 alias tat="tmux at -t"
-#Git
-alias gfo="git fetch origin"
-alias gbr="git br -v"
-alias gfd="git log --diff-filter=D --summary"
-alias gfa="git log --diff-filter=A --summary"
-alias gfm="git log --diff-filter=M --summary"
-alias gfr="git log --diff-filter=R --summary"
 #Gems
-alias zs="zeus"
-alias zsr="zeus rake"
 alias slogit="~/.slogger/slogger"
 [ -f /opt/boxen/env.sh  ] && source /opt/boxen/env.sh
 #Chruby
@@ -115,3 +110,4 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
