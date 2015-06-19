@@ -1,43 +1,4 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="miloshadzic"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(zeus git brew gem osx zsh-vim-mode pow rbenv zsh-syntax-highlighting zsh-history-substring-search vim-dwim)
-
-
-source $ZSH/oh-my-zsh.sh
-
-# Customize to your needs...
+export VISUAL='vim -f'
 export EDITOR='vim -f'
 export GOPATH=$HOME/src/play/go
 # export CC="/usr/bin/gcc-4.2"
@@ -50,8 +11,13 @@ PS1="$PS1"'$([ -n "$TMUX"  ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr 
 # export SSL_CERT_FILE=/opt/boxen/homebrew/etc/openssl/certs/ca_bundle.pem
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+[ -f /opt/boxen/env.sh  ] && source /opt/boxen/env.sh
 
 . /opt/boxen/homebrew/etc/profile.d/z.sh
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
 #Bundler
 alias be="bundle exec"
@@ -60,6 +26,7 @@ alias bi="bundle install"
 alias bip="bundle install --path=.bundle"
 alias bis="bundle install --binstubs"
 #System
+alias g="git"
 alias v="vim"
 alias o.="open ."
 alias cl="clear"
@@ -71,6 +38,7 @@ alias dt="ditto"
 alias ctr="ctags -R -f ./.git/tags ."
 alias agrr="ag --ignore-dir log --ignore-dir tmp --ignore tags --ignore-dir node_modules --ignore-dir _build"
 alias jg="jobs"
+alias br="hub browse"
 #Databases
 alias psql-server-start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
 alias psql-server-stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
@@ -79,9 +47,6 @@ alias tkil="tmux kill-session -t"
 alias tnw="tmux new-window -n"
 alias tls="tmux ls"
 alias tat="tmux at -t"
-#Gems
-alias slogit="~/.slogger/slogger"
-[ -f /opt/boxen/env.sh  ] && source /opt/boxen/env.sh
 #Chruby
 source /opt/boxen/chruby/share/chruby/chruby.sh
 source /opt/boxen/chruby/share/chruby/auto.sh

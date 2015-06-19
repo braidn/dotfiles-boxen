@@ -11,6 +11,7 @@ set shell=/bin/bash
 ""Plugs
 Plug 'altercation/vim-colors-solarized'
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite-outline'
 Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_mac.mak' }
 Plug 'mattn/gist-vim'
 Plug 'scrooloose/syntastic'
@@ -52,18 +53,21 @@ Plug 'tpope/vim-dispatch'
 Plug 'fatih/vim-go'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  }
 Plug 'gabebw/vim-rdio'
-""Will you make the cut
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'mrtazz/simplenote.vim'
-Plug 'malkomalko/projections.vim'
 Plug 'Shougo/neocomplete.vim'
+
+""Will you make the cut
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'malkomalko/projections.vim'
+Plug 'wellle/tmux-complete.vim'
+Plug 'idanarye/vim-merginal'
 
 ""Syntax
 Plug 'ChrisYip/Better-CSS-Syntax-for-Vim'
 Plug 'vim-scripts/Puppet-Syntax-Highlighting'
+Plug 'isRuslan/vim-es6'
 Plug 'tpope/vim-cucumber'
 Plug 'pangloss/vim-javascript'
 Plug 'leshill/vim-json'
@@ -77,6 +81,7 @@ Plug 'wting/rust.vim'
 Plug 'slim-template/vim-slim'
 Plug 'wavded/vim-stylus'
 Plug 'heartsentwined/vim-emblem'
+Plug 'mxw/vim-jsx'
 
 call plug#end()            " required
 filetype plugin indent on
@@ -243,7 +248,6 @@ nmap <silent> <leader>\ :nohlsearch<CR>
 nmap <leader>yr :YRShow<cr>
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>u :GundoToggle<cr>
-nnoremap <silent> <leader>tt :TagbarToggle<CR>
 nnoremap <Leader>rm :Rmodel
 nnoremap <Leader>rv :Rview
 nnoremap <Leader>rc :Rcontroller
@@ -251,6 +255,10 @@ nnoremap <Leader>sl :set cc=80<CR>
 nnoremap <leader>gg :GitGutterToggle<cr>
 nnoremap <leader>= :Tab/
 nnoremap <leader>tw :set textwidth=80<cr>
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 " I gots the SpLITZ
 nnoremap <C-J> <C-W><C-J>
@@ -272,7 +280,7 @@ hi Conceal ctermfg=red ctermbg=NONE
 
 " Vimux stuff
 " Prompt for a command to run
- map <Leader>rt :VimuxPromptCommand<CR>
+ map <Leader>rc :VimuxPromptCommand<CR>
 " " Run last command executed by RunVimTmuxCommand
  map <Leader>rl :VimuxRunLastCommand<CR>
 " " Close all other tmux panes in current window
@@ -282,6 +290,8 @@ hi Conceal ctermfg=red ctermbg=NONE
 
 " Vroom Settings
 let g:vroom_use_dispatch = 1
+nnoremap <silent> <leader>rt :VroomRunTestFile<CR>
+nnoremap <silent> <leader>Rt :VroomRunNearestTestFile<CR>
 
 "Switch
 nnoremap - :Switch<cr>
@@ -342,6 +352,7 @@ nnoremap <Leader>/ :Unite grep:.<cr>
 let g:unite_source_history_yank_enable = 1
 nnoremap <Leader>Y :Unite history/yank<cr>
 nnoremap <Leader>s :Unite -quick-match buffer<cr>
+nnoremap <Leader>o :Unite outline<cr>
 
 nnoremap <Leader>zt :call RunCurrentSpecFile()<CR>
 nnoremap <Leader>zl :call RunLastSpec()<CR>
@@ -349,11 +360,18 @@ let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 
 " When dealing with special file types
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+au BufRead,BufNewFile *.rabl set ft=ruby
+
 autocmd Filetype gitcommit setlocal spell textwidth=72
+autocmd FileType markdown let b:dispatch = 'octodown %'
+
 let g:slime_target = "tmux"
 let g:netrw_bufsettings='nu'
 let netrw_liststyle=3
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_coffeescript_checkers = ['coffeelint']
+let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
+
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#source('grep', 'ignore_globs', ['./.git/*', './.bundle/*', 'node_modules/**', 'app/bower_components/**', 'app/images/**', 'dist/**'])
