@@ -56,6 +56,7 @@ token = bb01b9fc8fc6a0c32da3eee96da8031f
 excludesfile = /Users/cannonball/.gitignore_global
 excludesfile = /opt/boxen/config/git/gitignore
 whitespace=fix,tab-in-indent,trailing-space,cr-at-eol
+editor = "NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 autocrlf = input
 safecrlf = warn
 
