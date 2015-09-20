@@ -10,28 +10,28 @@ set shell=/bin/bash
 
 ""Plugs
 Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_mac.mak' }
 Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
 Plug 'scrooloose/syntastic'
 Plug 'godlygeek/tabular'
-Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Lokaltog/vim-easymotion'
+Plug 'othree/yajs.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'tomtom/tlib_vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'sjl/gundo.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'tpope/vim-repeat'
 Plug 'benmills/vimux'
 Plug 'skalnik/vim-vroom'
 Plug 'sjl/vitality.vim'
 Plug 'mattn/emmet-vim'
-Plug 'mattn/webapi-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
 Plug 'vim-scripts/matchit.zip'
@@ -40,12 +40,10 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'szw/vim-tags'
 Plug 'b3niup/numbers.vim'
 Plug 'tpope/vim-bundler'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'vim-scripts/ZoomWin'
 Plug 'itchyny/lightline.vim'
-Plug 'thoughtbot/vim-rspec'
-Plug 'rizzatti/funcoo.vim'
+Plug 'mbbill/undotree'
+Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' }
 Plug 'rizzatti/dash.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'gcmt/wildfire.vim'
@@ -56,20 +54,18 @@ Plug 'gabebw/vim-rdio'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'Shougo/neocomplete.vim'
+Plug 'wellle/tmux-complete.vim'
 
 ""Will you make the cut
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'malkomalko/projections.vim'
-Plug 'wellle/tmux-complete.vim'
-Plug 'idanarye/vim-merginal'
+Plug 'majutsushi/tagbar'
 
 ""Syntax
 Plug 'ChrisYip/Better-CSS-Syntax-for-Vim'
 Plug 'vim-scripts/Puppet-Syntax-Highlighting'
 Plug 'isRuslan/vim-es6'
 Plug 'tpope/vim-cucumber'
-Plug 'pangloss/vim-javascript'
 Plug 'leshill/vim-json'
 Plug 'briancollins/vim-jst'
 Plug 'groenewege/vim-less'
@@ -82,6 +78,13 @@ Plug 'slim-template/vim-slim'
 Plug 'wavded/vim-stylus'
 Plug 'heartsentwined/vim-emblem'
 Plug 'mxw/vim-jsx'
+Plug 'AndrewRadev/vim-eco'
+
+""Snippets
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
 
 call plug#end()            " required
 filetype plugin indent on
@@ -191,10 +194,10 @@ let g:vimshell_force_overwrite_statusline = 0
 
 "Color stuff
 syntax enable
-set term=xterm-256color
-let g:solarized_termtrans = 1
+" let g:solarized_termtrans = 1
+let g:gruvbox_termcolors=16
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 set clipboard=unnamed
 
 " Random personal settings
@@ -229,6 +232,7 @@ set splitbelow
 set splitright
 set nowrap
 set ttimeoutlen=100
+set complete+=kspell
 "trim whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -242,12 +246,13 @@ noremap <leader>P :set paste<CR>:put  *<CR>:set nopaste<CR>
 " Leader Mapping
 let mapleader = "\<Space>"
 let g:gitgutter_enabled = 0
+map <Leader>tb :TagbarToggle<CR>
 nmap <leader>nx :vp.<CR>
 nmap <leader>nv :ss.<CR>
 nmap <silent> <leader>\ :nohlsearch<CR>
 nmap <leader>yr :YRShow<cr>
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-nnoremap <leader>u :GundoToggle<cr>
+nnoremap <leader>u :UndotreeToggle <cr>
 nnoremap <Leader>rm :Rmodel
 nnoremap <Leader>rv :Rview
 nnoremap <Leader>rc :Rcontroller
@@ -259,12 +264,6 @@ nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
-
-" I gots the SpLITZ
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
 "Fugitive bindings
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -308,12 +307,6 @@ vmap <Leader>a, :Tabularize /,<CR>
 
 " OmniComplete Supertab and UltraSnips
 set omnifunc=syntaxcomplete#Complete
-" Ultisnips directory for extra snipps
-let g:UltiSnipsSnippetsDir        = '/.vim/bundle/vim-snippets/'
-let g:UltiSnipsSnippetDirectories = ['UltiSnips']
-let g:UltiSnipsListSnippets = "<c-a>"
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
 
  "Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -347,13 +340,6 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap jj <ESC>
 
-nnoremap <Leader>p :Unite file_rec/async:./<cr>
-nnoremap <Leader>/ :Unite grep:.<cr>
-let g:unite_source_history_yank_enable = 1
-nnoremap <Leader>Y :Unite history/yank<cr>
-nnoremap <Leader>s :Unite -quick-match buffer<cr>
-nnoremap <Leader>o :Unite outline<cr>
-
 nnoremap <Leader>zt :call RunCurrentSpecFile()<CR>
 nnoremap <Leader>zl :call RunLastSpec()<CR>
 let g:rspec_command = "Dispatch bundle exec rspec {spec}"
@@ -368,33 +354,46 @@ autocmd FileType markdown let b:dispatch = 'octodown %'
 let g:slime_target = "tmux"
 let g:netrw_bufsettings='nu'
 let netrw_liststyle=3
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_coffeescript_checkers = ['coffeelint']
 let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
 
+let g:python_host_prog = '/opt/boxen/homebrew/Cellar/python/2.7.8_2/bin'
+
+"Unite
+nnoremap <Leader>p :Unite buffer file_rec/async:!<cr>
+nnoremap <Leader>/ :Unite grep<cr>
+nnoremap <Leader>h :Unite history/yank<cr>
+nnoremap <Leader>s :Unite -quick-match buffer<cr>
+nnoremap <Leader>o :Unite outline<cr>
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('grep', 'ignore_globs', ['./.git/*', './.bundle/*', 'node_modules/**', 'app/bower_components/**', 'app/images/**', 'dist/**'])
-call unite#custom#source('file_rec/async', 'ignore_globs', ['./.git/*', './.bundle/*', 'node_modules/**', 'app/bower_components/**', 'app/images/**', 'dist/**'])
+call unite#custom#source('file_rec/async', 'ignore_globs', ['./.git/**', './.bundle/**', 'node_modules/**', 'app/bower_components/**', 'app/images/**', 'dist/**'])
+let g:unite_source_history_yank_enable = 1
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+let g:unite_prompt = "➤ "
 let g:unite_source_rec_async_command =
-    \ 'ag --follow --nocolor --nogroup -g ""'
+  \ ['ag', '--follow', '--nocolor', '--nogroup',
+  \  '--hidden', '-g', '']
+" I gots the SpLITZ
+let g:tmux_navigator_no_mappings = 1
 
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 
-nnoremap <Leader>nce :NeoCompleteEnable<cr>
-nnoremap <Leader>ncd :NeoCompleteDisable<cr>
 
 " A Better Grep
 if executable('ag')
-  " Use ag over grep
-   let g:unite_source_grep_command='ag'
-   let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
-   let g:unite_source_grep_recursive_opt='--line-numbers'
-  set grepprg=ag\ --nogroup\ --nocolor
+  let g:unite_source_grep_command = 'ag'
+  " let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup -g ""'
+  let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden --ignore ' .
+        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_recursive_opt = ''
 endif
 
 function! s:RevealInFinder()

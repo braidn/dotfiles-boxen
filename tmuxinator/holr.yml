@@ -1,0 +1,6 @@
+project_name: holr
+project_root: ~/src/hollar
+windows:
+  - vim:
+  - server: #noop
+  - logs: xtail log/

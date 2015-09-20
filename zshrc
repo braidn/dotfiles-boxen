@@ -1,6 +1,7 @@
-export VISUAL='vim -f'
-export EDITOR='vim -f'
+export VISUAL='nvim -f'
+export EDITOR='nvim -f'
 export GOPATH=$HOME/src/play/go
+
 # export CC="/usr/bin/gcc-4.2"
 # perl warnings
 export LC_CTYPE=en_US.UTF-8
@@ -9,8 +10,8 @@ export LC_ALL=en_US.UTF-8
 export CLICOLOR=1
 PS1="$PS1"'$([ -n "$TMUX"  ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 # export SSL_CERT_FILE=/opt/boxen/homebrew/etc/openssl/certs/ca_bundle.pem
-
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+# tmuxinator scripts for saving specific tmux setups and projects
+# qfc for quick file completion on
 [ -f /opt/boxen/env.sh  ] && source /opt/boxen/env.sh
 
 . /opt/boxen/homebrew/etc/profile.d/z.sh
@@ -27,7 +28,8 @@ alias bip="bundle install --path=.bundle"
 alias bis="bundle install --binstubs"
 #System
 alias g="git"
-alias v="vim"
+alias v="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
+alias nv="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 alias o.="open ."
 alias cl="clear"
 alias cwd='pwd | pbcopy'
@@ -39,6 +41,8 @@ alias ctr="ctags -R -f ./.git/tags ."
 alias agrr="ag --ignore-dir log --ignore-dir tmp --ignore tags --ignore-dir node_modules --ignore-dir _build"
 alias jg="jobs"
 alias br="hub browse"
+alias rr="ranger"
+alias avim="NVIM_LISTEN_ADDRESS=/tmp/neovim/neovim nvim"
 #Databases
 alias psql-server-start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
 alias psql-server-stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
@@ -46,10 +50,11 @@ alias psql-server-stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
 alias tkil="tmux kill-session -t"
 alias tnw="tmux new-window -n"
 alias tls="tmux ls"
-alias tat="tmux at -t"
+alias tat="tmux at -d -t"
 #Chruby
 source /opt/boxen/chruby/share/chruby/chruby.sh
 source /opt/boxen/chruby/share/chruby/auto.sh
+source /opt/boxen/bin/k.sh
 RUBIES=(/opt/rubies/*)
 export RUBIES
 
@@ -76,3 +81,5 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -s "$HOME/.qfc/bin/qfc.sh" ]] && source "$HOME/.qfc/bin/qfc.sh"
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
