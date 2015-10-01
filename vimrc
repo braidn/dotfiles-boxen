@@ -18,7 +18,7 @@ Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'scrooloose/syntastic'
 Plug 'godlygeek/tabular'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'othree/yajs.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
@@ -28,8 +28,7 @@ Plug 'tomtom/tlib_vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'AndrewRadev/switch.vim'
 Plug 'tpope/vim-repeat'
-Plug 'benmills/vimux'
-Plug 'skalnik/vim-vroom'
+Plug 'janko-m/vim-test'
 Plug 'sjl/vitality.vim'
 Plug 'mattn/emmet-vim'
 Plug 'airblade/vim-gitgutter'
@@ -287,10 +286,13 @@ hi Conceal ctermfg=red ctermbg=NONE
 " " Interrupt any command running in the runner pane
  map <Leader>rh :VimuxClearRunnerHistory<CR>
 
-" Vroom Settings
-let g:vroom_use_dispatch = 1
-nnoremap <silent> <leader>rt :VroomRunTestFile<CR>
-nnoremap <silent> <leader>Rt :VroomRunNearestTestFile<CR>
+" Vim Test
+nmap <silent> <leader>rt :TestNearest<CR>
+nmap <silent> <leader>rT :TestFile<CR>
+nmap <silent> <leader>rs :TestSuite<CR>
+nmap <silent> <leader>rl :TestLast<CR>
+nmap <silent> <leader>rv :TestVisit<CR>
+let test#strategy = "dispatch"
 
 "Switch
 nnoremap - :Switch<cr>
@@ -386,14 +388,33 @@ nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 
-
-" A Better Grep
+"Unite Grep
+let g:unite_source_grep_max_candidates = 200
 if executable('ag')
+  " Use ag in unite grep source.
   let g:unite_source_grep_command = 'ag'
-  " let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup -g ""'
-  let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden --ignore ' .
-        \  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+  let g:unite_source_grep_default_opts =
+        \ '-i --vimgrep --hidden --ignore ' .
+        \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
   let g:unite_source_grep_recursive_opt = ''
+elseif executable('pt')
+  " Use pt in unite grep source.
+  " https://github.com/monochromegane/the_platinum_searcher
+  let g:unite_source_grep_command = 'pt'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack-grep')
+  " Use ack in unite grep source.
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts =
+        \ '-i --no-heading --no-color -k -H'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('jvgrep')
+  " For jvgrep.
+  let g:unite_source_grep_command = 'jvgrep'
+  let g:unite_source_grep_default_opts =
+        \ '-i --exclude ''\.(git|svn|hg|bzr)'''
+  let g:unite_source_grep_recursive_opt = '-R'
 endif
 
 function! s:RevealInFinder()
