@@ -5,11 +5,12 @@
 
 ### Reqirements
 
-1. [Vundle][2]
-1. [Slate][3]
 1. [Tmuxinator][4]
+1. [Maglev For Tmux][2]
+1. [Prezto Zsh][3]
 
 [1]: http://boxen.github.com/
-[2]: https://github.com/gmarik/vundle
-[3]: https://github.com/jigish/slate
+[2]: https://github.com/caiogondim/maglev
+[3]: https://github.com/sorin-ionescu/prezto
 [4]: https://github.com/aziz/tmuxinator
+
