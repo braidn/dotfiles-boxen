@@ -1,6 +1,0 @@
-project_name: hcry
-project_root: ~/src/hughandcrye
-windows:
-  - editor:
-  - server:
-  - logs: xtail ./log

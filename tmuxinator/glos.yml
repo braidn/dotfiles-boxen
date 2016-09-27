@@ -1,9 +1,7 @@
 # ~/.tmuxinator/scratch.yml
 # you can make as many tabs as you wish...
 
-name: airw
-root: ~/src/airware/
+project_name: glos
+project_root: ~/src/glossier-retail
 windows:
-  - editor: 
-  - server: 
-  - logs: xtail log/
+  - root: #drop in root

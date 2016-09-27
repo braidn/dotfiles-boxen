@@ -4,6 +4,6 @@
 name: qtly
 root: ~/src/quarterly/
 windows:
-  - editor: vim .
+  - editor: nv .
   - server:
   - dlogs: xtail log

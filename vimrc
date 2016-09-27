@@ -9,80 +9,68 @@ scriptencoding utf-8
 set shell=/bin/bash
 
 ""Plugs
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline'
 Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_mac.mak' }
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-Plug 'scrooloose/syntastic'
-Plug 'godlygeek/tabular'
+Plug 'benekastah/neomake'
 Plug 'justinmk/vim-sneak'
-Plug 'othree/yajs.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
-Plug 'tomtom/tlib_vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'AndrewRadev/switch.vim'
 Plug 'tpope/vim-repeat'
 Plug 'janko-m/vim-test'
-Plug 'sjl/vitality.vim'
 Plug 'mattn/emmet-vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'ervandew/supertab'
-Plug 'vim-scripts/matchit.zip'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'szw/vim-tags'
 Plug 'b3niup/numbers.vim'
-Plug 'tpope/vim-bundler'
-Plug 'vim-scripts/ZoomWin'
 Plug 'itchyny/lightline.vim'
 Plug 'mbbill/undotree'
 Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' }
-Plug 'rizzatti/dash.vim'
-Plug 'edkolev/tmuxline.vim'
-Plug 'gcmt/wildfire.vim'
 Plug 'tpope/vim-dispatch'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': 'go'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install'  }
-Plug 'gabebw/vim-rdio'
-Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-vinegar'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'wellle/tmux-complete.vim'
+Plug 'kassio/neoterm'
+Plug 'luochen1990/rainbow'
+Plug 'itspriddle/vim-marked'
+Plug 'christoomey/vim-tmux-runner'
+Plug 'sheerun/vim-polyglot'
 
 ""Will you make the cut
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'malkomalko/projections.vim'
-Plug 'majutsushi/tagbar'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+Plug 'tommcdo/vim-lion'
+Plug 'elmcast/elm-vim', { 'for': 'elm' }
 
-""Syntax
-Plug 'ChrisYip/Better-CSS-Syntax-for-Vim'
-Plug 'vim-scripts/Puppet-Syntax-Highlighting'
-Plug 'isRuslan/vim-es6'
-Plug 'tpope/vim-cucumber'
-Plug 'leshill/vim-json'
-Plug 'briancollins/vim-jst'
-Plug 'groenewege/vim-less'
-Plug 'tpope/vim-haml'
-Plug 'plasticboy/vim-markdown'
-Plug 'nono/vim-handlebars'
-Plug 'kchmck/vim-coffee-script'
-Plug 'wting/rust.vim'
-Plug 'slim-template/vim-slim'
-Plug 'wavded/vim-stylus'
-Plug 'heartsentwined/vim-emblem'
-Plug 'mxw/vim-jsx'
-Plug 'AndrewRadev/vim-eco'
+""Additional syntax
+Plug 'posva/vim-vue', { 'for': 'vue' }
+
+
+""Unite
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite-outline'
+Plug 'tsukkee/unite-tag'
+Plug 'osyo-manga/unite-quickfix'
+Plug 'critiqjo/unite-fasd.vim'
+Plug 'rhysd/unite-redpen.vim', { 'for': 'liquid' }
+Plug 'Shougo/vimfiler.vim'
 
 ""Snippets
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
+Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets'
 
 call plug#end()            " required
@@ -92,7 +80,7 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste'  ], [ 'fugitive', 'filename'  ] ],
-      \   'right': [ [ 'syntastic', 'lineinfo'  ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype'  ]  ]
+      \   'right': [ [ 'lineinfo'  ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype'  ]  ]
       \ },
       \ 'component_function': {
       \   'fugitive': 'MyFugitive',
@@ -101,12 +89,6 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \ },
-      \ 'component_type': {
-      \   'syntastic': 'error',
       \ },
       \ 'subseparator': { 'left': '|', 'right': '|'  }
       \ }
@@ -123,8 +105,6 @@ endfunction
 function! MyFilename()
   let fname = expand('%:t')
   return fname == 'ControlP' ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
         \ &ft == 'unite' ? unite#get_status_string() :
         \ &ft == 'vimshell' ? vimshell#get_status_string() :
@@ -160,36 +140,16 @@ endfunction
 function! MyMode()
   let fname = expand('%:t')
   return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
         \ &ft == 'unite' ? 'Unite' :
         \ &ft == 'vimfiler' ? 'VimFiler' :
         \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
-
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
-
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
-
+let g:rainbow_active = 1
 
 "Color stuff
 syntax enable
@@ -232,8 +192,7 @@ set splitright
 set nowrap
 set ttimeoutlen=100
 set complete+=kspell
-"trim whitespace on save
-autocmd BufWritePre * :%s/\s\+$//e
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 "Yank into OS X, might require reattach-to-user clipboard"
 noremap <leader>y "*y
@@ -244,20 +203,11 @@ noremap <leader>P :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 " Leader Mapping
 let mapleader = "\<Space>"
-let g:gitgutter_enabled = 0
-map <Leader>tb :TagbarToggle<CR>
-nmap <leader>nx :vp.<CR>
-nmap <leader>nv :ss.<CR>
-nmap <silent> <leader>\ :nohlsearch<CR>
-nmap <leader>yr :YRShow<cr>
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-nnoremap <leader>u :UndotreeToggle <cr>
+
 nnoremap <Leader>rm :Rmodel
 nnoremap <Leader>rv :Rview
 nnoremap <Leader>rc :Rcontroller
 nnoremap <Leader>sl :set cc=80<CR>
-nnoremap <leader>gg :GitGutterToggle<cr>
-nnoremap <leader>= :Tab/
 nnoremap <leader>tw :set textwidth=80<cr>
 nnoremap ; :
 nnoremap : ;
@@ -276,47 +226,15 @@ nnoremap <silent> <leader>gw :Gwrite!<CR>
 "Indent Lines
 hi Conceal ctermfg=red ctermbg=NONE
 
-" Vimux stuff
-" Prompt for a command to run
- map <Leader>rc :VimuxPromptCommand<CR>
-" " Run last command executed by RunVimTmuxCommand
- map <Leader>rl :VimuxRunLastCommand<CR>
-" " Close all other tmux panes in current window
- map <Leader>rx :VimuxCloseRunner<CR>
-" " Interrupt any command running in the runner pane
- map <Leader>rh :VimuxClearRunnerHistory<CR>
+tnoremap <Leader><ESC> <C-\><C-n>
 
-" Vim Test
-nmap <silent> <leader>rt :TestNearest<CR>
-nmap <silent> <leader>rT :TestFile<CR>
-nmap <silent> <leader>rs :TestSuite<CR>
-nmap <silent> <leader>rl :TestLast<CR>
-nmap <silent> <leader>rv :TestVisit<CR>
-let test#strategy = "dispatch"
+" Testing
+
+let test#strategy = "vtr"
+nmap <silent> ,t :TestFile<CR>
 
 "Switch
 nnoremap - :Switch<cr>
-
-" Tabularize
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a:: :Tabularize /:\zs<CR>
-vmap <Leader>a:: :Tabularize /:\zs<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-
-" OmniComplete Supertab and UltraSnips
-set omnifunc=syntaxcomplete#Complete
-
- "Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 if has('conceal')
   set conceallevel=2 concealcursor=i
@@ -332,19 +250,15 @@ let g:tmuxline_preset = {
       \'z' : '#(tmux-mem-cpu-load 2)',}
 
 ""Key remaps
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+" nnoremap <up> <nop>
+" nnoremap <down> <nop>
+" nnoremap <left> <nop>
+" nnoremap <right> <nop>
+" inoremap <up> <nop>
+" inoremap <down> <nop>
+" inoremap <left> <nop>
+" inoremap <right> <nop>
 inoremap jj <ESC>
-
-nnoremap <Leader>zt :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>zl :call RunLastSpec()<CR>
-let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 
 " When dealing with special file types
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
@@ -353,26 +267,25 @@ au BufRead,BufNewFile *.rabl set ft=ruby
 autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd FileType markdown let b:dispatch = 'octodown %'
 
-let g:slime_target = "tmux"
-let g:netrw_bufsettings='nu'
-let netrw_liststyle=3
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_coffeescript_checkers = ['coffeelint']
-let g:syntastic_ruby_checkers       = ['rubocop', 'mri']
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
 
-let g:python_host_prog = '/opt/boxen/homebrew/Cellar/python/2.7.8_2/bin'
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_ruby_enabled_makers  = ['rubocop', 'mri']
 
 "Unite
 nnoremap <Leader>p :Unite buffer file_rec/async:!<cr>
 nnoremap <Leader>/ :Unite grep<cr>
-nnoremap <Leader>h :Unite history/yank<cr>
 nnoremap <Leader>s :Unite -quick-match buffer<cr>
-nnoremap <Leader>o :Unite outline<cr>
+nnoremap <Leader>o :Unite -vertical -winwidth=35 outline<cr>
+nnoremap <Leader>qf :Unite -no-quit -direction=botright quickfix<cr>
+nnoremap <Leader>ll :Unite -no-quit -direction=botright location_list<cr>
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source('grep', 'ignore_globs', ['./.git/*', './.bundle/*', 'node_modules/**', 'app/bower_components/**', 'app/images/**', 'dist/**'])
-call unite#custom#source('file_rec/async', 'ignore_globs', ['./.git/**', './.bundle/**', 'node_modules/**', 'app/bower_components/**', 'app/images/**', 'dist/**'])
+call unite#custom#source('grep', 'ignore_globs', ['./.git/*', './.bundle/*', './node_modules/**', './app/bower_components/**', './app/images/**', './dist/**'])
+call unite#custom#source('file_rec/async', 'ignore_globs', ['./.git/**', './.bundle/**', './node_modules/**', './app/bower_components/**', './app/images/**', './dist/**'])
+let g:unite_fasd#fasd_path = '/usr/local/bin/fasd'
 let g:unite_source_history_yank_enable = 1
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
@@ -380,13 +293,40 @@ let g:unite_prompt = "➤ "
 let g:unite_source_rec_async_command =
   \ ['ag', '--follow', '--nocolor', '--nogroup',
   \  '--hidden', '-g', '']
-" I gots the SpLITZ
-let g:tmux_navigator_no_mappings = 1
+let g:vimfiler_as_default_explorer = 1
 
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+call vimfiler#custom#profile('default', 'context', {
+      \ 'safe' : 0,
+      \ })
+
+autocmd! BufWritePost * Neomake
+
+" hide/close terminal
+nnoremap <silent> ,tc :call neoterm#close()<cr>
+" clear terminal
+nnoremap <silent> ,tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tk :call neoterm#kill()<cr>
+
+" Tmux
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nmap <silent> ,vk :VtrKillRunner<CR>
+
+if has('nvim')
+  set termguicolors
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+endif
+
+"Ctags
+let g:easytags_auto_highlight = 0
+let g:easytags_on_cursorhold = 0 " disabled because it causes a recursive tag generation
+let g:easytags_dynamic_files = 0
+let g:easytags_suppress_ctags_warning = 1
+set cpoptions+=d
 
 "Unite Grep
 let g:unite_source_grep_max_candidates = 200
