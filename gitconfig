@@ -29,10 +29,13 @@ aa = add --all
 ai = add --interactive
 changes = diff --name-status -r
 st = status -sb
-ct = commit
+ct = commit -v
 ctm = commit -m
 br = branch
 co = checkout
+cot = checkout -t
+cob = checkout -b
+mg = merge
 df = diff
 ds = diff --staged
 wd = diff --color-words
@@ -42,6 +45,7 @@ rh = reset --hard
 lg = log -p
 pl = pull
 ph = push
+phsu = push --set-upstream
 lol = log --graph --decorate --pretty=oneline --abbrev-commit
 lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 ls = ls-files
@@ -56,7 +60,7 @@ token = bb01b9fc8fc6a0c32da3eee96da8031f
 excludesfile = /Users/cannonball/.gitignore_global
 excludesfile = /opt/boxen/config/git/gitignore
 whitespace=fix,tab-in-indent,trailing-space,cr-at-eol
-editor = "NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
+editor = "nvim"
 autocrlf = input
 safecrlf = warn
 
@@ -71,3 +75,6 @@ tool = vimdiff
 
 [difftool]
 prompt = false
+
+[push]
+  default = simple
